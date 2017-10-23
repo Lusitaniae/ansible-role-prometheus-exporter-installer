@@ -1,0 +1,43 @@
+---
+- hosts: all
+
+  vars:
+    prometheus_exporter_install_plugins:
+     - name: Apache Exporter
+       github_user: Lusitaniae
+       github_name: apache_exporter
+       github_version: 0.4.0
+       install_path: /usr/local/bin/apache_exporter
+       exporter_args: -scrape_uri http://localhost/server-status/?auto
+
+     - name: Memcached Exporter
+       github_user: prometheus
+       github_name: memcached_exporter
+       github_version: 0.3.0
+       install_path: /usr/local/bin/memcached_exporter
+       exporter_args:
+
+    # CentOs does not include server-status by default
+    apache_vhosts:
+      - servername: localhost
+        extra_parameters: |
+            <Location /server-status>
+              SetHandler server-status
+            </Location>
+
+  pre_tasks:
+  - name: Update apt cache.
+    apt: update_cache=yes cache_valid_time=600
+    when: ansible_os_family == 'Debian'
+    changed_when: false
+
+  - name: Install dependencies.
+    package:
+      name:
+        - curl
+      state: present
+
+  roles:
+    - geerlingguy.memcached
+    - geerlingguy.apache
+    - role_under_test
