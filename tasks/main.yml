@@ -1,0 +1,35 @@
+---
+- name: Download exporter releases.
+  get_url:
+    url: "https://github.com/{{ item.github_user }}/{{ item.github_name }}/releases/download/v{{ item.github_version }}/{{ item.github_name }}-{{ item.github_version }}.{{ ansible_system|lower }}-386.tar.gz"
+    dest: "/tmp/{{ item.github_name }}.tar.gz"
+    mode: 0755
+  with_items: "{{ prometheus_exporter_install_plugins }}"
+
+- name: Create exporters directory.
+  file:
+    path: "/usr/local/bin/{{ item.github_name }}"
+    state: directory
+  with_items: "{{ prometheus_exporter_install_plugins }}"
+
+- name: Uncompress exporter releases.
+  unarchive:
+    remote_src: yes
+    src: "/tmp/{{ item.github_name }}.tar.gz"
+    dest: "/usr/local/bin/{{ item.github_name }}"
+    extra_opts: "--strip-components=1" # remove first level directory
+  with_items: "{{ prometheus_exporter_install_plugins }}"
+
+- name: Setup exporters as system services.
+  template:
+    src: exporter.service.j2
+    dest: "/etc/systemd/system/{{ item.github_name }}.service"
+    mode: 0644
+  with_items: "{{ prometheus_exporter_install_plugins }}"
+
+- name: Ensure exporters are enabled and started as system services.
+  systemd:
+    name: "{{ item.github_name }}"
+    state: started
+    enabled: yes
+  with_items: "{{ prometheus_exporter_install_plugins }}"

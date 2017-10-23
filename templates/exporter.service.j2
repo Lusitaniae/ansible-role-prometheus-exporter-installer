@@ -1,0 +1,13 @@
+# {{ ansible_managed }}
+
+[Unit]
+Description=Prometheus {{ item.name }}
+After=local-fs.target network-online.target network.target
+Wants=local-fs.target network-online.target network.target
+
+[Service]
+Type=simple
+ExecStart={{ item.install_path }}/{{ item.github_name }} {{ item.exporter_args }}
+
+[Install]
+WantedBy=multi-user.target
