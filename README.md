@@ -41,7 +41,7 @@ Example Playbook
 
 
   roles:
-    - Lusitaniae.prometheus_exporter_installer
+    - Lusitaniae.prometheus-exporter-installer
 
 ```
 
