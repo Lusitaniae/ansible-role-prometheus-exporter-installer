@@ -10,6 +10,14 @@ Role for installing prometheus exporters in your server.
 
 Should work for _all_ exporters with a similar release procedure as the official ones. Where *promu* is used to build and package the exporters for a number of architectures and deploy the final packages to the respective release in GitHub.
 
+Usecase
+------------
+
+Installing one or more exporters in a system. 
+
+Useful when you're running traditional VMs which you may be sharing for multiple services.
+
+
 Requirements
 ------------
 
