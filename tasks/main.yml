@@ -1,4 +1,10 @@
 ---
+- name: Create non privileged user
+  user:
+    name: "{{ exporter_username }}"
+    comment: Non privileged user that runs prometheus exporters
+    shell: /sbin/nologin
+
 - name: Download exporter releases.
   get_url:
     url: "https://github.com/{{ item.github_user }}/{{ item.github_name }}/releases/download/v{{ item.github_version }}/{{ item.github_name }}-{{ item.github_version }}.{{ ansible_system|lower }}-386.tar.gz"

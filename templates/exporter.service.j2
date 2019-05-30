@@ -2,6 +2,8 @@
 
 [Unit]
 Description=Prometheus {{ item.name }}
+User={{ exporter_username }}
+Group={{ exporter_username }}
 After=local-fs.target network-online.target network.target
 Wants=local-fs.target network-online.target network.target
 
