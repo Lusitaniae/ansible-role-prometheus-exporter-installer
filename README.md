@@ -8,7 +8,7 @@ Ansible Role: Prometheus Exporter Installer
 
 Role for installing prometheus exporters in your server.
 
-Should work for all exporters with similar release procedure to official exporters, with the pre built binaries available from the Github releases of the project.
+Should work for _all_ exporters with a similar release procedure as the official ones. Where *promu* is used to build and package the exporters for a number of architectures and deploy the final packages to the respective release in GitHub.
 
 Requirements
 ------------
