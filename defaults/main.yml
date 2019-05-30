@@ -1,4 +1,5 @@
 ---
+exporter_username: exporter
 prometheus_exporter_install_plugins:
 # Examples
 # - name: Apache Exporter
