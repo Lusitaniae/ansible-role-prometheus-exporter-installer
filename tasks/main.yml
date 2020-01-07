@@ -7,11 +7,11 @@
 
 - name: Download exporter releases.
   get_url:
-    url: "{{ github_release }}"
+    url: "{{ item.github_release }}"
     dest: "/tmp/{{ item.github_name }}.tar.gz"
     mode: 0755
+  when: item.github_release is defined
   with_items: "{{ prometheus_exporter_install_plugins }}"
-  when: github_release is defined
   
 - name: Download exporter releases.
   get_url:
@@ -19,7 +19,7 @@
     dest: "/tmp/{{ item.github_name }}.tar.gz"
     mode: 0755
   with_items: "{{ prometheus_exporter_install_plugins }}"
-  when: github_release is not defined
+  when: item.github_release is not defined
   
 - name: Create exporters directory.
   file:
