@@ -7,11 +7,20 @@
 
 - name: Download exporter releases.
   get_url:
+    url: "{{ github_release }}"
+    dest: "/tmp/{{ item.github_name }}.tar.gz"
+    mode: 0755
+  with_items: "{{ prometheus_exporter_install_plugins }}"
+  when: github_release is defined
+  
+- name: Download exporter releases.
+  get_url:
     url: "https://github.com/{{ item.github_user }}/{{ item.github_name }}/releases/download/v{{ item.github_version }}/{{ item.github_name }}-{{ item.github_version }}.{{ ansible_system|lower }}-386.tar.gz"
     dest: "/tmp/{{ item.github_name }}.tar.gz"
     mode: 0755
   with_items: "{{ prometheus_exporter_install_plugins }}"
-
+  when: github_release is not defined
+  
 - name: Create exporters directory.
   file:
     path: "/usr/local/bin/{{ item.github_name }}"
