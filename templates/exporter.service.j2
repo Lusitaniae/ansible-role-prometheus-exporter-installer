@@ -10,7 +10,7 @@ Wants=local-fs.target network-online.target network.target
 [Service]
 Type=simple
 Restart=on-failure
-ExecStart={{ item.install_path }}/{{ item.github_name }} {{ item.exporter_args }}
+ExecStart=/usr/local/bin/{{ item.github_name }}/{{ item.github_name }} {{ item.exporter_args }}
 
 [Install]
 WantedBy=multi-user.target
