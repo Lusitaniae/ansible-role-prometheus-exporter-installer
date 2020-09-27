@@ -1,9 +1,10 @@
 ---
-- name: Create non privileged user
+- name: Create non privileged user.
   user:
     name: "{{ exporter_username }}"
     comment: Non privileged user that runs prometheus exporters
     shell: /sbin/nologin
+    create_home: no
 
 - name: Download exporter releases.
   get_url:
