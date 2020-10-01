@@ -2,15 +2,15 @@
 
 [Unit]
 Description=Prometheus {{ item.name }}
-User={{ exporter_username }}
-Group={{ exporter_username }}
 After=local-fs.target network-online.target network.target
 Wants=local-fs.target network-online.target network.target
 
 [Service]
 Type=simple
+User={{ exporter_username }}
+Group={{ exporter_username }}
 Restart=on-failure
-ExecStart={{ item.install_path }}/{{ item.github_name }} {{ item.exporter_args }}
+ExecStart=/usr/local/bin/{{ item.github_name }}/{{ item.github_name }} {{ item.exporter_args }}
 
 [Install]
 WantedBy=multi-user.target

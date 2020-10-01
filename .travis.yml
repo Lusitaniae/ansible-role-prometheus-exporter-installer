@@ -3,9 +3,12 @@ services: docker
 
 env:
   - distro: centos7
+  - distro: centos8
   - distro: ubuntu1604
+  - disrot: ubuntu1804
+  - distro: ubuntu2004
   - distro: debian9
-  - distro: debian8
+  - disrot: debian10
 
 
 script:

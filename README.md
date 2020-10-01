@@ -37,14 +37,12 @@ Example Playbook
        github_user: Lusitaniae
        github_name: apache_exporter
        github_version: 0.4.0
-       install_path: /usr/local/bin/apache_exporter
        exporter_args: -scrape_uri http://localhost/server-status/?auto
 
      - name: Memcached Exporter
        github_user: prometheus
        github_name: memcached_exporter
        github_version: 0.3.0
-       install_path: /usr/local/bin/memcached_exporter
        exporter_args:
 
 

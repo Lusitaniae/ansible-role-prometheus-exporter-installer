@@ -1,26 +1,27 @@
 ---
-- name: Create non privileged user
+- name: Create non privileged user.
   user:
     name: "{{ exporter_username }}"
     comment: Non privileged user that runs prometheus exporters
     shell: /sbin/nologin
+    create_home: no
 
 - name: Download exporter releases.
   get_url:
     url: "{{ item.github_release }}"
     dest: "/tmp/{{ item.github_name }}.tar.gz"
-    mode: 0755
+    mode: 0644
   when: item.github_release is defined
   with_items: "{{ prometheus_exporter_install_plugins }}"
-  
+
 - name: Download exporter releases.
   get_url:
     url: "https://github.com/{{ item.github_user }}/{{ item.github_name }}/releases/download/v{{ item.github_version }}/{{ item.github_name }}-{{ item.github_version }}.{{ ansible_system|lower }}-386.tar.gz"
     dest: "/tmp/{{ item.github_name }}.tar.gz"
-    mode: 0755
+    mode: 0644
   with_items: "{{ prometheus_exporter_install_plugins }}"
   when: item.github_release is not defined
-  
+
 - name: Create exporters directory.
   file:
     path: "/usr/local/bin/{{ item.github_name }}"
