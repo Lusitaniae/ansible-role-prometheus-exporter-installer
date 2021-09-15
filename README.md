@@ -44,6 +44,17 @@ Example Playbook
        github_name: memcached_exporter
        github_version: 0.3.0
        exporter_args:
+     
+     # This exporter has different naming convention, 
+     # so you can override download url using github_release
+     - name: Redis Exporter
+       github_user: oliver006
+       github_name: redis_exporter
+       github_version: 1.27.0
+       github_release: https://github.com/oliver006/redis_exporter/releases/download/v1.27.0/redis_exporter-v1.27.0.linux-386.tar.gz
+       install_path: /usr/local/bin/redis_exporter
+       exporter_args: "--redis.addr=redis://{{ redis_hostname }}:6379"
+
 
 
   roles:
