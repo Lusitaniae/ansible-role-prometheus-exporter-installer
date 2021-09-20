@@ -68,7 +68,7 @@ Example Playbook
        github_version: 1.27.0
        github_release: https://github.com/oliver006/redis_exporter/releases/download/v1.27.0/redis_exporter-v1.27.0.linux-386.tar.gz
        install_path: /usr/local/bin/redis_exporter
-       exporter_args: "--redis.addr=redis://{{ redis_hostname }}:6379"
+       exporter_args: "--web.listen-address 0.0.0.0:9122 --redis.addr=redis://{{ redis_hostname }}:6379"
 
 
 
