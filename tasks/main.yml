@@ -39,13 +39,13 @@
 - name: Setup exporters as system services.
   template:
     src: exporter.service.j2
-    dest: "/etc/systemd/system/{{ item.github_name }}.service"
+    dest: "/etc/systemd/system/{{ item.service_name | default(item.github_name) }}.service"
     mode: 0644
   with_items: "{{ prometheus_exporter_install_plugins }}"
 
 - name: Ensure exporters are enabled and started as system services.
   systemd:
-    name: "{{ item.github_name }}"
+    name: "{{ item.service_name | default(item.github_name) }}"
     state: started
     enabled: yes
   with_items: "{{ prometheus_exporter_install_plugins }}"
