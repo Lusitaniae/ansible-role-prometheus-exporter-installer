@@ -10,7 +10,7 @@ Type=simple
 User={{ exporter_username }}
 Group={{ exporter_username }}
 Restart=on-failure
-ExecStart=/usr/local/bin/{{ item.github_name }}/{{ item.github_name }} {{ item.exporter_args }}
+ExecStart={{ prometheus_exporter_install_directory }}/{{ item.github_name }}/{{ item.github_name }} {{ item.exporter_args }}
 
 [Install]
 WantedBy=multi-user.target
