@@ -16,7 +16,7 @@
 
 - name: Download exporter releases.
   get_url:
-    url: "https://github.com/{{ item.github_user }}/{{ item.github_name }}/releases/download/v{{ item.github_version }}/{{ item.github_name }}-{{ item.github_version }}.{{ ansible_system|lower }}-{{ prometheus_exporter_arch }}.tar.gz"
+    url: "https://github.com/{{ item.github_user }}/{{ item.github_name }}/releases/download/v{{ item.github_version }}/{{ item.github_name }}-{{ item.github_version }}.{{ ansible_system|lower }}-{{ item.prometheus_exporter_arch }}.tar.gz"
     dest: "/tmp/{{ item.github_name }}.tar.gz"
     mode: 0644
   with_items: "{{ prometheus_exporter_install_plugins }}"
