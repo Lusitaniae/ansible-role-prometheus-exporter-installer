@@ -14,3 +14,4 @@ prometheus_exporter_install_plugins:
 #   github_name: memcached_exporter
 #   github_version: 0.3.0
 #   systemd_args:
+prometheus_exporter_arch: 386
